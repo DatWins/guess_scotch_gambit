@@ -5,7 +5,7 @@ navigation_menu_title: "How You Win"
 weight: 2
 header_menu: true
 ---
-Each game is White's side of a game that starts 1.Nc3 and that White won. Guess White's moves. These are the best-rated wins in the database.
+Each game is White's side of a Scotch Gambit that White won. Guess White's moves from move 5 onward. These are the best-rated wins in the database.
 
 {{< game-list list="win" >}}
 

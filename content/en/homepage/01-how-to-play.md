@@ -5,7 +5,7 @@ navigation_menu_title: "How to Play"
 weight: 1
 header_menu: true
 ---
-Every game here starts with **1.Nc3**, and the first reply from Black is already on the board. You play White and type the move you think White played, one move at a time. After each of your moves, Black's reply appears on the scoresheet.
+Every game here is a **Scotch Gambit**: **1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Bc4**, and Black's response to 4.Bc4 is already on the board. You play White and type the move you think White played, one move at a time. After each of your moves, Black's reply appears on the scoresheet.
 
 Each game has a par of **100 points**, shared evenly over the moves you guess. Each move's par is shown on the scoresheet:
 

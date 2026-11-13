@@ -1,8 +1,8 @@
-r"""Build the "Know Your Opening" guess-the-move pages from data/Dunst.pgn (games with 1.Nc3).
+r"""Build the "Guess the Scotch Gambit" pages from data/ScotchGambit.pgn.
 
 Run from the repo folder:   python tools/make_pages.py
 
-It rewrites content/en/games/ and the three menu pages How You Win, How You Lose and Traps.
+It rewrites content/en/games/ and the menu pages How You Win, How You Lose, Traps, etc.
 Only the Python standard library is needed (no chess package).
 
   How You Win   games White won (1-0), the best-rated SAMPLE of them
@@ -12,13 +12,14 @@ Only the Python standard library is needed (no chess package).
   Middle Game          White's moves 15 to 30, games cut after move 30
   Endgame              White's moves 35 to the end
 
-Each game page guesses White's moves, from the position after 1.Nc3 and Black's reply.
+Each game page guesses White's moves starting from move 5 (after the Scotch Gambit
+moves 1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Bc4 and Black's fourth reply are shown).
 Change SAMPLE to show more or fewer games on the How You Win and How You Lose menus.
 """
 import math, pathlib, re, shutil, unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PGN = ROOT / "data" / "Dunst.pgn"
+PGN = ROOT / "data" / "ScotchGambit.pgn"
 CONTENT = ROOT / "content" / "en"
 GAMES = CONTENT / "games"
 HOME = CONTENT / "homepage"
@@ -26,7 +27,9 @@ HOME = CONTENT / "homepage"
 SAMPLE = 40          # games on How You Win and How You Lose (the best-rated ones)
 TRAP_MIN, TRAP_MAX = 10, 15
 TOTAL_PAR = 100      # points shared over the moves of each game
-START_PLY = 2        # 1.Nc3 and Black's reply are shown; guessing starts with White's second move
+# The Scotch Gambit moves 1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Bc4 and Black's reply
+# occupy plies 0-7; guessing starts with White's 5th move (ply 8).
+START_PLY = 8
 MIDDLE_START_PLY = 28   # White's 15th move (ply index 28)
 MIDDLE_LAST_PLY = 60    # the middle game page stops after Black's 30th move (plies 0 to 59)
 ENDGAME_START_PLY = 68  # White's 35th move (ply index 68)
@@ -195,13 +198,13 @@ def main():
     HOME.mkdir(parents=True, exist_ok=True)
     write_menu_page(
         "02-how-you-win.md", 2, "How You Win",
-        "Each game is White's side of a game that starts 1.Nc3 and that White won. "
-        "Guess White's moves. These are the best-rated wins in the database.",
+        "Each game is White's side of a Scotch Gambit that White won. "
+        "Guess White's moves from move 5 onward. These are the best-rated wins in the database.",
         [(None, "win", "")],
     )
     write_menu_page(
         "03-how-you-lose.md", 3, "How You Lose",
-        "Each game is White's side of a game that starts 1.Nc3 and that White lost. "
+        "Each game is White's side of a Scotch Gambit that White lost. "
         "Guess White's moves and see where it went wrong. These are the best-rated losses in the database.",
         [(None, "lose", "")],
     )
